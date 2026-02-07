@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Me Perdonas Mi Chaparrita? 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cat-container {
+            margin-bottom: 30px;
+        }
+
+        .cat {
+            font-size: 80px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .emoji-cry {
+            font-size: 40px;
+            margin: 10px 0;
+        }
+
+        .message {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .heart-text {
+            color: #ff1493;
+            font-size: 20px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-si {
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .btn-si:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+        }
+
+        #btnNo {
+            background: #f0f0f0;
+            color: #999;
+            transition: all 0.5s ease;
+        }
+
+        #btnNo:hover {
+            background: #e0e0e0;
+        }
+
+        .hearts {
+            font-size: 30px;
+            margin: 10px 0;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .response {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe4ec 100%);
+            border-radius: 20px;
+            animation: bounceIn 0.8s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .response h2 {
+            color: #ff1493;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .response p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .falling-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 999;
+        }
+
+        .heart-fall {
+            position: absolute;
+            font-size: 30px;
+            animation: fall 4s linear;
+            opacity: 0;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease;
+        }
+
+        .warning-text {
+            color: #ff1493;
+            font-size: 16px;
+            margin-top: 15px;
+            font-weight: bold;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="falling-hearts" id="heartsContainer"></div>
+    
+    <div class="container" id="mainContainer">
+        <div class="cat-container">
+            <div class="cat">🐱</div>
+        </div>
+
+        <h1>¿ALEJANDRA ME PERDONAS?</h1>
+        <div class="emoji-cry">😢</div>
+
+        <div class="hearts">💕</div>
+
+        <div class="message">
+            <p><strong>Lo siento mucho, mi amor...</strong></p>
+            <p>Sé que metí la pata y te lastimé. No hay excusa para lo que hice.</p>
+            <p>Eres lo más importante en mi vida y no quiero perderte.</p>
+        </div>
+
+        <div class="heart-text">
+            TE AMOOOO MI CHAPARRITA 💖
+        </div>
+
+        <div class="buttons" id="buttonsContainer">
+            <button class="btn-si" id="btnSi">SÍ 💗</button>
+            <button class="btn-si" id="btnSiSi">SÍ SÍ 💕</button>
+            <button id="btnNo">NO</button>
+        </div>
+
+        <div id="warningText" class="warning-text hidden">
+            ¡Tienes que decir que SÍ, mi amor! 🥺
+        </div>
+
+        <div id="response" class="hidden"></div>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btnSi');
+        const btnSiSi = document.getElementById('btnSiSi');
+        const btnNo = document.getElementById('btnNo');
+        const response = document.getElementById('response');
+        const heartsContainer = document.getElementById('heartsContainer');
+        const mainContainer = document.getElementById('mainContainer');
+        const warningText = document.getElementById('warningText');
+        const buttonsContainer = document.getElementById('buttonsContainer');
+
+        let clicksOnNo = 0;
+
+        function showLoveResponse() {
+            // Cambiar todos los emojis tristes a felices
+            document.querySelector('.cat').textContent = '😺';
+            document.querySelector('.emoji-cry').textContent = '😊';
+            document.querySelector('h1').innerHTML = '¡ALEJANDRA ME PERDONÓ! 🎉';
+            
+            response.className = 'response';
+            response.innerHTML = `
+                <h2>TE AMOOOO MI JENNY 💖</h2>
+                <div style="font-size: 60px; margin: 20px 0;">😍🎉💕✨</div>
+                <p style="font-size: 24px; color: #ff1493; font-weight: bold; margin: 20px 0;">
+                    POR TI LE RUEGOOOO TODAA MI VIDA PRINCESA
+                </p>
+                <p style="font-size: 20px;">❤️😍😊🥰</p>
+                <p><strong>¡Sabía que eres el amor de mi vida!</strong></p>
+                <p>Te prometo que voy a esforzarme para ser mejor cada día.</p>
+                <p>Eres mi todo y te amo con toda mi alma.</p>
+                <p style="margin-top: 20px; color: #ff1493; font-weight: bold; font-size: 20px;">
+                    TE AMO MUCHÍSIMO MI CHAPARRITA 💗💗💗
+                </p>
+            `;
+            
+            // Ocultar botones
+            buttonsContainer.classList.add('hidden');
+            warningText.classList.add('hidden');
+            
+            // Cambiar el fondo a más alegre
+            document.body.style.background = 'linear-gradient(135deg, #fff5cc 0%, #ffeb99 100%)';
+            
+            // Crear corazones y emojis felices cayendo
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createFallingHeart();
+                }, i * 150);
+            }
+        }
+
+        btnSi.addEventListener('click', showLoveResponse);
+        btnSiSi.addEventListener('click', showLoveResponse);
+
+        btnNo.addEventListener('click', function() {
+            clicksOnNo++;
+            mainContainer.classList.add('shake');
+            
+            setTimeout(() => {
+                mainContainer.classList.remove('shake');
+            }, 500);
+
+            if (clicksOnNo === 1) {
+                warningText.classList.remove('hidden');
+                btnNo.textContent = '¿NO? 🥺';
+            } else if (clicksOnNo === 2) {
+                warningText.innerHTML = '¡Vamos mi amor, di que SÍ! 😭💔';
+                btnNo.textContent = '¿Segura? 😢';
+            } else if (clicksOnNo === 3) {
+                warningText.innerHTML = '¡Por favor mi chaparrita! 🙏💕';
+                btnNo.style.opacity = '0.5';
+            } else if (clicksOnNo >= 4) {
+                // El botón NO desaparece completamente
+                btnNo.style.transition = 'all 1s ease';
+                btnNo.style.transform = 'scale(0)';
+                btnNo.style.opacity = '0';
+                
+                setTimeout(() => {
+                    btnNo.classList.add('hidden');
+                }, 1000);
+                
+                warningText.innerHTML = '¡Solo puedes decir que SÍ! 💖<br>¡No hay otra opción porque te amo demasiado! 🥹';
+                
+                // Los botones SÍ crecen y se hacen más llamativos
+                btnSi.style.transform = 'scale(1.2)';
+                btnSiSi.style.transform = 'scale(1.2)';
+                btnSi.style.animation = 'pulse 1s infinite';
+                btnSiSi.style.animation = 'pulse 1s infinite';
+            }
+        });
+
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-fall';
+            heart.textContent = ['💕', '💖', '💗', '💝', '💞', '❤️', '😍', '😊', '🥰', '😁', '🎉', '✨', '🌟'][Math.floor(Math.random() * 13)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
